@@ -3,10 +3,11 @@ export type Response<T> = {
   data: T,
 }
 
-export type FilesForm = {
-  work_book: string;
-  log_audit: string;
+export type AppConfig = {
+  'theme': 'dark'| 'light',
+  'readme': string,
 }
+
 
 export type VersionCheckData = {
   app_version: string,

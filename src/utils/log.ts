@@ -10,4 +10,5 @@ export const CHANGELOG_LIST: Array<TVersionObject> = [
   }
 ]
 
-export const AppVersion = `${CHANGELOG_LIST[0].version}（${CHANGELOG_LIST[0].date}）`
+export const AppVersion = CHANGELOG_LIST[0].version
+export const AppVersionText = `${CHANGELOG_LIST[0].version}（${CHANGELOG_LIST[0].date}）`

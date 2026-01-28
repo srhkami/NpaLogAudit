@@ -1,13 +1,11 @@
 import {BsFillPersonLinesFill} from "react-icons/bs";
 import {MdNumbers} from "react-icons/md";
-import {AppVersion} from "@/utils/log.ts";
+import {AppVersionText} from "@/utils/log.ts";
 import ModalFeedback from "./ModalFeedback.tsx";
 import {Button, Col, Row} from "@/component";
 import Upload from "@/features/Intro/Upload.tsx";
 
 export default function Intro() {
-
-
   return (
     <div className='flex justify-center items-center'>
       <div className="card bg-neutral text-neutral-content w-96 my-10">
@@ -32,7 +30,7 @@ export default function Intro() {
               版本
             </div>
             <div className='col-span-2 text-start flex items-center'>
-              {AppVersion}
+              {AppVersionText}
             </div>
             <div className='col-span-2 flex'>
               <a className='btn btn-info btn-sm btn-outline ml-auto' target='_blank'

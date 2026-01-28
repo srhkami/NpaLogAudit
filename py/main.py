@@ -1,16 +1,34 @@
+import json
 from app_log import log
 import os
+import sys
 import webview
 from response import Response
 from process import process_audit_files
 
-DEBUG_MODE = False
+DEBUG_MODE = True
+
+
+def get_root_path():
+    # 如果是打包後的 exe
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)
+    # 如果是開發環境的 .py
+    else:
+        return os.path.dirname(os.path.abspath(__file__))
+
+
+# 設定檔完整路徑
+CONFIG_FILE = os.path.join(get_root_path(), "config.json")
+# 瀏覽器緩存路徑 (如果你還是想讓 localStorage 生效)
+CACHE_DIR = os.path.join(get_root_path(), "web_cache")
 
 
 class Api:
 
     def __init__(self):
         self._window = None
+        self.config = self.load_config()
 
     def select_excel(self):
         """
@@ -52,6 +70,21 @@ class Api:
         processed_df.to_csv(result[0], index=False, encoding='utf-8-sig')
         os.startfile(result[0])
 
+    def load_config(self):
+        """從根目錄讀取JSON"""
+        if os.path.exists(CONFIG_FILE):
+            with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+                return json.loads(f)
+        return {'theme': 'dark', 'readme': '1.0.0'}
+
+    def save_config(self, key, value):
+        self.config.update({**self.config, key: value})
+        with open(CONFIG_FILE, 'w', encoding='utf-8') as f:
+            json.dump(self.config, f, ensure_ascii=False, indent=4)
+
+    def get_config(self):
+        return self.config
+
 
 if __name__ == '__main__':
     if DEBUG_MODE:
@@ -68,4 +101,8 @@ if __name__ == '__main__':
         confirm_close=True,
     )
     log().debug('程式開啟成功')
-    webview.start(debug=DEBUG_MODE)
+    webview.start(
+        debug=DEBUG_MODE,
+        storage_path=CACHE_DIR,
+        private_mode=False,
+    )
