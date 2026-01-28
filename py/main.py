@@ -4,7 +4,7 @@ import webview
 from response import Response
 from process import process_audit_files
 
-DEBUG_MODE = True
+DEBUG_MODE = False
 
 
 class Api:

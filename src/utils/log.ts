@@ -5,7 +5,7 @@ export const CHANGELOG_LIST: Array<TVersionObject> = [
     version: '1.0.0',
     date: '1150128',
     logs: [
-      {color: "new", text: '加入基礎功能'},
+      {color: "new", text: '完成比對工作紀錄簿及日誌的功能'},
     ]
   }
 ]

@@ -2,14 +2,12 @@ import {LuNotebookTabs} from "react-icons/lu";
 import {Modal, ModalBody, ModalHeader} from "@/component";
 import {CHANGELOG_LIST} from "@/utils/log.ts";
 import ChangelogCollapse from "@/features/About/ChangelogCollapse.tsx";
-
-type Props = {
-  readonly isShow: boolean,
-  readonly setIsShow: (value: boolean) => void,
-}
+import {useModal} from "@/hooks";
 
 /* 顯示更新日誌的對話框 */
-export default function ModalChangelog({isShow, setIsShow}: Props) {
+export default function ModalChangelog() {
+
+  const {isShow, onShow, onHide} = useModal();
 
   const Collapses = CHANGELOG_LIST.map(obj => {
     return (
@@ -18,7 +16,9 @@ export default function ModalChangelog({isShow, setIsShow}: Props) {
   })
 
   return (
-    <Modal isShow={isShow} onHide={() => setIsShow(false)} closeButton>
+    <>
+      <button onClick={onShow}>更新日誌</button>
+    <Modal isShow={isShow} onHide={onHide} closeButton>
       <ModalBody>
         <ModalHeader className='justify-center' divider>
           <LuNotebookTabs className='text-info mr-2'/>
@@ -29,5 +29,6 @@ export default function ModalChangelog({isShow, setIsShow}: Props) {
         </div>
       </ModalBody>
     </Modal>
+    </>
   )
 }

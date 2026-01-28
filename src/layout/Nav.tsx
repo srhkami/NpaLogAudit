@@ -1,15 +1,10 @@
 import BtnThemeToggle from "./BtnThemeToggle.tsx";
-import ModalDisclaimer from "@/features/About/ModalDisclaimer.tsx";
-import {useState} from "react";
 import ModalChangelog from "@/features/About/ModalChangelog.tsx";
 import {Dropdown, DropdownToggle, DropdownContent} from "@/component";
 import {HiMenuAlt2} from "react-icons/hi";
 import ModalReadme from "@/features/About/ModalReadme.tsx";
 
 export default function Nav() {
-
-  const [isDisclaimerShow, setIsDisclaimerShow] = useState<boolean>(false);
-  const [isChangelogShow, setIsChangelogShow] = useState<boolean>(false);
 
   return (
     <div className="navbar bg-base-100 shadow-sm sticky top-0 z-20">
@@ -24,10 +19,7 @@ export default function Nav() {
                 <ModalReadme/>
               </li>
               <li>
-                <button onClick={() => setIsDisclaimerShow(true)}>免責聲明</button>
-              </li>
-              <li>
-                <button onClick={() => setIsChangelogShow(true)}>更新日誌</button>
+                <ModalChangelog/>
               </li>
             </ul>
           </DropdownContent>
@@ -39,8 +31,6 @@ export default function Nav() {
       <div className="navbar-end">
         <BtnThemeToggle/>
       </div>
-      <ModalDisclaimer isShow={isDisclaimerShow} setIsShow={setIsDisclaimerShow}/>
-      <ModalChangelog isShow={isChangelogShow} setIsShow={setIsChangelogShow}/>
     </div>
   )
 }
